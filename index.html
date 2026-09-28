@@ -1,0 +1,466 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Living in the IT Era Review</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans+Condensed:wght@500;600;700&display=swap">
+<style>
+:root{
+  --bg:#EDF0F5; --surface:#FFFFFF; --surface-2:#F5F7FA; --ink:#14213A; --muted:#5A6680; --line:#D3D9E4;
+  --accent:#2346C8; --accent-soft:#E3E9FB; --accent-ink:#FFFFFF;
+  --good:#1D8048; --good-soft:#E1F3E8; --bad:#BF342C; --bad-soft:#FBE6E4; --warn:#B86E00;
+  --card:#E8DCB5; --card-ink:#5B4A1E; --hole:#FFFFFF;
+  --shadow:0 1px 2px rgba(20,33,58,.06),0 8px 24px rgba(20,33,58,.06);
+  --display:"IBM Plex Sans Condensed","Arial Narrow",system-ui,sans-serif;
+  --body:"Atkinson Hyperlegible",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,"SFMono-Regular",Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    color-scheme:dark;
+    --bg:#0E1420; --surface:#161F31; --surface-2:#1B2539; --ink:#E5EAF4; --muted:#95A1BA; --line:#2A3550;
+    --accent:#7F9BFF; --accent-soft:#223262; --accent-ink:#0E1420;
+    --good:#52C98A; --good-soft:#15352A; --bad:#FF7C72; --bad-soft:#3D1D1E; --warn:#F2B04A;
+    --card:#3B3422; --card-ink:#D9C891; --hole:#0E1420;
+    --shadow:0 1px 2px rgba(0,0,0,.3),0 8px 24px rgba(0,0,0,.25);
+  }
+}
+:root[data-theme="dark"]{
+  color-scheme:dark;
+  --bg:#0E1420; --surface:#161F31; --surface-2:#1B2539; --ink:#E5EAF4; --muted:#95A1BA; --line:#2A3550;
+  --accent:#7F9BFF; --accent-soft:#223262; --accent-ink:#0E1420;
+  --good:#52C98A; --good-soft:#15352A; --bad:#FF7C72; --bad-soft:#3D1D1E; --warn:#F2B04A;
+  --card:#3B3422; --card-ink:#D9C891; --hole:#0E1420;
+  --shadow:0 1px 2px rgba(0,0,0,.3),0 8px 24px rgba(0,0,0,.25);
+}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.55;padding-inline:16px;padding-block:24px 48px}
+.wrap{max-width:760px;margin:0 auto;display:flex;flex-direction:column;gap:20px}
+h1,h2,h3{font-family:var(--display);line-height:1.15;text-wrap:balance;margin:0}
+p{margin:0}
+.eyebrow{font-family:var(--mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.panel{background:var(--surface);border:1px solid var(--line);border-radius:14px;box-shadow:var(--shadow);padding:24px}
+button{font:inherit;cursor:pointer}
+button:focus-visible,input:focus-visible,.opt:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+.btn{border:0;border-radius:10px;padding:12px 20px;font-family:var(--display);font-weight:600;font-size:17px;letter-spacing:.01em;background:var(--accent);color:var(--accent-ink);transition:transform .08s,filter .15s}
+.btn:hover{filter:brightness(1.08)}
+.btn:active{transform:translateY(1px)}
+.btn:disabled{opacity:.45;cursor:not-allowed}
+.btn.ghost{background:transparent;color:var(--ink);border:1px solid var(--line)}
+.btn.ghost:hover{background:var(--surface-2);filter:none}
+.btn.danger{background:var(--bad);color:#fff}
+.row{display:flex;flex-wrap:wrap;gap:12px;align-items:center}
+
+/* punch-card strip used as a signature motif */
+.card-strip{background:var(--card);color:var(--card-ink);border-radius:6px 16px 6px 6px;padding:12px 14px 10px;position:relative;overflow:hidden}
+.card-strip::before{content:"";position:absolute;top:0;right:0;width:22px;height:22px;background:var(--bg);clip-path:polygon(0 0,100% 0,100% 100%)}
+.holes{display:grid;grid-template-columns:repeat(25,1fr);gap:5px 4px}
+.hole{aspect-ratio:1/2.1;max-width:100%;border-radius:2px;background:transparent;border:1px dashed color-mix(in srgb,var(--card-ink) 45%,transparent)}
+.hole.g{background:var(--good);border:0}
+.hole.b{background:var(--bad);border:0}
+.hole.p{background:var(--hole);border:0}
+.strip-meta{display:flex;justify-content:space-between;font-family:var(--mono);font-size:11px;letter-spacing:.06em;margin-top:8px;gap:8px;flex-wrap:wrap}
+
+/* start */
+.hero h1{font-size:clamp(34px,7vw,52px);font-weight:700;letter-spacing:-.01em}
+.hero .sub{color:var(--muted);margin-top:6px;font-size:17px}
+.rules{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px}
+.rules li{background:var(--surface-2);border:1px solid var(--line);border-radius:10px;padding:14px}
+.rules b{display:block;font-family:var(--display);font-size:18px;margin-bottom:2px}
+.rules span{color:var(--muted);font-size:14.5px}
+label{font-weight:700;font-size:14px}
+input[type=text]{width:100%;font:inherit;padding:11px 12px;border-radius:10px;border:1px solid var(--line);background:var(--surface-2);color:var(--ink);margin-top:6px}
+.field{max-width:420px}
+
+/* quiz */
+.bar{display:flex;align-items:center;gap:16px;justify-content:space-between;flex-wrap:wrap}
+.qcount{font-family:var(--mono);font-size:14px;color:var(--muted);font-variant-numeric:tabular-nums}
+.qcount strong{color:var(--ink);font-size:22px;font-weight:600}
+.progress{height:6px;background:var(--line);border-radius:99px;overflow:hidden}
+.progress > i{display:block;height:100%;background:var(--accent);width:0;transition:width .3s}
+.timer{position:relative;width:64px;height:64px;flex:none}
+.timer svg{width:100%;height:100%;transform:rotate(-90deg)}
+.timer circle{fill:none;stroke-width:6}
+.timer .track{stroke:var(--line)}
+.timer .arc{stroke:var(--accent);stroke-linecap:round;transition:stroke .3s}
+.timer.warn .arc{stroke:var(--warn)}
+.timer.crit .arc{stroke:var(--bad)}
+.timer .num{position:absolute;inset:0;display:grid;place-items:center;font-family:var(--mono);font-weight:600;font-size:18px;font-variant-numeric:tabular-nums}
+.timer.crit .num{color:var(--bad)}
+.stem{font-size:19px;line-height:1.55;max-width:65ch}
+.opts{display:grid;gap:10px}
+.opt{display:flex;gap:14px;align-items:flex-start;text-align:left;width:100%;padding:14px 16px;border-radius:12px;border:1.5px solid var(--line);background:var(--surface);color:var(--ink);transition:border-color .12s,background .12s}
+.opt:hover{border-color:var(--accent)}
+.opt .let{flex:none;width:30px;height:30px;border-radius:8px;display:grid;place-items:center;font-family:var(--mono);font-weight:600;background:var(--surface-2);border:1px solid var(--line)}
+.opt .txt{padding-top:3px}
+.opt[aria-checked="true"]{border-color:var(--accent);background:var(--accent-soft)}
+.opt[aria-checked="true"] .let{background:var(--accent);color:var(--accent-ink);border-color:var(--accent)}
+.foot{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
+.hint{font-size:13px;color:var(--muted)}
+.linkbtn{background:none;border:0;color:var(--muted);text-decoration:underline;text-underline-offset:3px;padding:6px 0;font-size:14px}
+.linkbtn:hover{color:var(--bad)}
+.confirm{border:1.5px solid var(--bad);background:var(--bad-soft);border-radius:12px;padding:16px;display:flex;flex-direction:column;gap:12px}
+.toast{position:fixed;left:50%;bottom:calc(20px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);background:var(--ink);color:var(--bg);padding:10px 16px;border-radius:10px;font-weight:700;font-size:14px;box-shadow:var(--shadow);z-index:5}
+.fade{animation:fade .25s ease}
+@keyframes fade{from{opacity:.4;transform:translateY(4px)}to{opacity:1;transform:none}}
+
+/* done + result */
+.center-note{color:var(--muted);max-width:52ch}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.stat{background:var(--surface-2);border:1px solid var(--line);border-radius:10px;padding:10px 12px;min-width:0}
+.stat .k{font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.stat .v{font-family:var(--display);font-size:clamp(22px,6vw,28px);font-weight:700;font-variant-numeric:tabular-nums}
+.stat.g .v{color:var(--good)} .stat.b .v{color:var(--bad)}
+.score{display:flex;align-items:baseline;gap:14px;flex-wrap:wrap}
+.score .big{font-family:var(--display);font-weight:700;font-size:clamp(56px,12vw,84px);line-height:1;font-variant-numeric:tabular-nums}
+.score .of{font-family:var(--display);font-size:28px;color:var(--muted)}
+.score .pct{font-family:var(--mono);font-size:16px;padding:4px 10px;border-radius:99px;background:var(--accent-soft);color:var(--accent);font-weight:600}
+.tabs{display:flex;gap:6px;flex-wrap:wrap}
+.tab{border:1px solid var(--line);background:var(--surface);color:var(--ink);border-radius:99px;padding:6px 14px;font-size:14px;font-weight:700}
+.tab[aria-pressed="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.review{display:flex;flex-direction:column;gap:12px}
+.ritem{border:1px solid var(--line);border-left:5px solid var(--line);border-radius:10px;padding:16px;background:var(--surface);display:flex;flex-direction:column;gap:10px}
+.ritem.g{border-left-color:var(--good)} .ritem.b{border-left-color:var(--bad)} .ritem.u{border-left-color:var(--warn)}
+.rhead{display:flex;justify-content:space-between;gap:10px;align-items:center;flex-wrap:wrap}
+.rnum{font-family:var(--mono);font-size:13px;color:var(--muted)}
+.pill{font-family:var(--mono);font-size:11.5px;letter-spacing:.06em;text-transform:uppercase;font-weight:600;padding:3px 9px;border-radius:99px}
+.pill.g{background:var(--good-soft);color:var(--good)} .pill.b{background:var(--bad-soft);color:var(--bad)} .pill.u{background:color-mix(in srgb,var(--warn) 16%,transparent);color:var(--warn)}
+.rstem{font-size:16px}
+.ropts{list-style:none;margin:0;padding:0;display:grid;gap:6px}
+.ropts li{display:flex;gap:10px;align-items:flex-start;padding:8px 10px;border-radius:8px;font-size:15px}
+.ropts .let{flex:none;font-family:var(--mono);font-weight:600;width:22px}
+.ropts li.correct{background:var(--good-soft)}
+.ropts li.correct .tag{color:var(--good)}
+.ropts li.wrong{background:var(--bad-soft)}
+.ropts li.wrong .tag{color:var(--bad)}
+.ropts .tag{margin-left:auto;font-family:var(--mono);font-size:11.5px;letter-spacing:.05em;text-transform:uppercase;font-weight:600;white-space:nowrap;padding-left:8px}
+.empty{color:var(--muted);text-align:center;padding:20px}
+@media (max-width:520px){
+  .panel{padding:18px}
+  .stem{font-size:17.5px}
+  .holes{grid-template-columns:repeat(25,1fr);gap:4px 3px}
+  .ropts li{flex-wrap:wrap}
+  .ropts .tag{margin-left:32px;padding-left:0}
+}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+
+<style>html{color-scheme:light}body{margin:0}[hidden]{display:none!important}img{max-width:100%}</style>
+</head>
+<body>
+<div class="wrap" id="app" aria-live="polite"></div>
+<div class="toast" id="toast" hidden></div>
+
+<script>
+const SECONDS = 70;
+const L = ["A","B","C","D"];
+// [question, [choices in original order], index of correct choice]
+const BANK = [
+["A worldwide bank needs one central system that can handle thousands of customer transactions at the same time without slowing down. Which type of computer is built for exactly this workload?",["A high-end workstation computer","A massive supercomputer system","A multi-user mainframe computer","A clustered minicomputer network"],2],
+["A group of developers wants an online platform to build and test their app. The provider takes care of the servers and operating systems, so the team can focus on their code. Which cloud service model fits?",["Platform as a Service (PaaS)","Infrastructure as a Service (IaaS)","Software as a Service (SaaS)","Hardware as a Service (HaaS)"],0],
+["A historian finds an old computer that uses thousands of fragile glass tubes, runs very hot and often burns out. To make it more reliable using the very next generation of technology, what would replace those glass tubes?",["Integrated circuits","Silicon microprocessors","Artificial intelligence","Semiconductor transistors"],3],
+["Today's factories run assembly machines using step-by-step digital instructions. Which historical invention first showed that stored instructions on punched cards could automate a mechanical task?",["The Scheutzian Calculation Engine","The Jacquard Loom mechanism","The Thomas de Colmar Arithmometer","The Leibniz Stepped Reckoner"],1],
+["An independent journalist starts an online journal to publish investigative stories straight to readers, skipping traditional news outlets. Which digital-age characteristic does this change in media production mainly represent?",["Ubiquitous network computing","High-tech global economics","User-Generated Content (UGC)","Infrastructure as a Service"],2],
+["A photographer applies a heavy rendering filter to a high-resolution photo, and the computer uses its hardware to carry out the math behind the effect. Which basic computer function is at work?",["Receiving user input","Processing information","Producing final output","Storing digital data"],1],
+["An architecture firm needs a computer for one person, with a powerful processor and strong graphics for rendering detailed 3D building models. Which computer type is the most suitable and cost-effective choice?",["A commercial minicomputer","A professional workstation","A standard personal computer","A centralized mainframe"],1],
+["A startup wants to rent bare virtual servers and storage so it can install its own operating systems and set up its network from scratch. Which cloud service model gives this foundational level of access?",["Software as a Service (SaaS)","Platform as a Service (PaaS)","Infrastructure as a Service (IaaS)","Database as a Service (DaaS)"],2],
+["A 19th-century mathematician needs a machine that can do automatic, programmable calculations, not just basic adding and subtracting with hand-turned gears. Which theoretical machine would meet this need?",["Babbage's Analytical Engine","Pascal's Mechanical Pascaline","Schickard's Calculating Clock","Napier's Mathematical Bones"],0],
+["Which technological breakthrough directly made it possible for personal computers to spread quickly into homes and small businesses in the late 20th century?",["The invention of the vacuum tube","The creation of the transistor","Very Large-Scale Integration (VLSI)","The development of cloud systems"],2],
+["During breaking news, bystanders livestream from their phones and give updates before professional reporters arrive. This best shows a major change in which part of modern media?",["The physical medium used","The role of the messenger","The structure of the message","The speed of the microprocessor"],1],
+["A programmer stores a program in the computer's memory together with the data it will work on, instead of feeding it in through punched tape. Which early computer first used this design successfully?",["The Harvard Mark 1","The Atanasoff-Berry Computer","The Zuse Z1 programmable computer","The Electronic Discrete Variable Automatic Computer"],3],
+["A user dictates a long essay with voice-recognition software, and the computer saves the text file to a solid-state drive for later editing. Saving the file to the drive is an example of which basic computer function?",["Controlling the workflow","Processing information","Storing information","Receiving data input"],2],
+["A medium-sized business needs a multi-user system so about fifty employees can use a central database at the same time. Which computer type best fits an organization of this size?",["A high-performance supercomputer","A distributed minicomputer","A standard desktop workstation","A massive enterprise mainframe"],1],
+["In the late 1960s, a company wants to replace its transistor-based computers with smaller, cheaper machines whose circuits are combined on a single piece of semiconductor. Which computer generation does this upgrade belong to?",["First-generation computing","Second-generation computing","Third-generation computing","Fourth-generation computing"],2],
+["A freelance writer uses a word processor that runs entirely in a web browser, with nothing to install, set up or update on their own computer. Which cloud computing model does this represent?",["Infrastructure as a Service (IaaS)","Software as a Service (SaaS)","Platform as a Service (PaaS)","Network as a Service (NaaS)"],1],
+["A government office needs a machine that can quickly summarize huge amounts of population data for counting and statistics. Which historical invention was built and used for exactly this purpose?",["Herman Hollerith's Tabulating Machine","Charles Babbage's Difference Engine","Thomas de Colmar's Arithmometer","Wilhelm Schickard's Calculating Machine"],0],
+["A logistics company uses a system that studies large amounts of past shipping data to forecast delays and change delivery routes automatically in real time. This kind of capability is a trademark of which computer generation?",["Second generation","Third generation","Fourth generation","Fifth generation"],3],
+["A historian studying the move from electro-mechanical to fully electronic machines wants to examine the first general-purpose electronic computer that could be reprogrammed to solve many kinds of problems. Which machine should they look at?",["The Zuse Z1","The ENIAC","The Harvard Mark 1","The Pascaline"],1],
+["A country's economy moves away from making physical industrial products and toward creating software, IT infrastructure and digital services. This shift is a key feature of which period in history?",["The Electromechanical Age","The Mechanical Information Age","The Digital (Information) Age","The Pre-Mechanical Era"],2],
+["An accountant in the mid-1800s wants a mass-produced, commercially successful mechanical machine that can reliably add, subtract, multiply and divide. Which device would they most likely buy for the office?",["The Stepped Reckoner","The Difference Engine","The Pascaline calculator","The commercial Arithmometer"],3],
+["While a demanding video game is running, the computer has to handle graphics, sound and fast controller input all at once without crashing. Which basic computer function manages these simultaneous tasks?",["Storing data securely","Controlling the workflow","Receiving digital input","Producing visual output"],1],
+["Government climate scientists need to simulate very complex global weather systems, which takes millions to trillions of instructions per second. Which type of computer is absolutely needed for this workload?",["A high-end minicomputer","An enterprise mainframe","A scientific supercomputer","A high-performance workstation"],2],
+["In the late 1600s, a mathematician wants a machine that can multiply and divide automatically, going beyond earlier devices that could only add and subtract. Which historical invention was designed to meet this need?",["Leibniz's Stepped Reckoner","Pascal's mechanical Pascaline","Napier's carved wooden Bones","Oughtred's mathematical Slide Rule"],0],
+["A patient wears a digital device on their wrist that constantly tracks their heart rate and automatically sends the data to their doctor's phone. How is this device classified among modern computers?",["A mobile tablet computer","A handheld smartphone","A portable laptop computer","A smart wearable device"],3],
+["A company's IT team wants full control of its virtual servers, operating systems and firewalls, without maintaining physical hardware in its own data center. Which cloud service model offers this balance?",["Software as a Service (SaaS)","Infrastructure as a Service (IaaS)","Platform as a Service (PaaS)","Application as a Service (AaaS)"],1],
+["An archaeologist finds ancient Sumerian clay tablets with wedge-shaped cuneiform marks used to record inventory and farm quantities. Which stage of information technology do these artifacts belong to?",["The Mechanical Age","The Electromechanical Age","The Pre-Mechanical Age","The Early Electronic Age"],2],
+["Instead of releasing a pre-recorded, one-way TV statement, a political candidate hosts a live stream to answer voters' questions in real time. This shows media changing from broadcast into what?",["Professionally produced content","Analog frequency transmission","Static informational delivery","Interactive and participatory"],3],
+["An IT administrator looks after a huge 1946 computer that uses enormous amounts of power and fills an entire room. Which core component is most likely behind these limitations?",["Silicon microprocessors","Electromagnetic vacuum tubes","Semiconductor integrated circuits","Solid-state transistors"],1],
+["A designer finishes a detailed digital blueprint and sends it to a large-format plotter to print a paper copy for the construction crew. What basic computer function does the plotter's job represent?",["Processing complex information","Receiving analog input","Producing digital output","Storing long-term data"],2],
+["A graphic designer wants to trace a hand-drawn sketch precisely into digital form for a new logo. Which input device is best for turning this hand movement into digital data?",["A standard optical mouse","A high-resolution scanner","A digitizer or graphic tablet","A web camera or webcam"],2],
+["A computer slows down a lot whenever several heavy programs are open together. Upgrading which part would most directly help it handle these active, temporary tasks?",["The Cache Memory","The Random Access Memory","The Read Only Memory","The Solid State Drive"],1],
+["After you plug in a new printer, the operating system still can't send documents to it. What type of software must be installed so the printer can understand the computer's commands?",["A network web browser","A system utility program","A productivity application","A specific device driver"],3],
+["A user wants the computer to run its hardware checks before the operating system starts. Which component stores these permanent startup instructions (BIOS/UEFI)?",["The read-only memory chip","The central processing unit","The secondary storage drive","The primary random access memory"],0],
+["A big retail store wants faster checkouts and fewer data-entry mistakes by cashiers. Which input device should it focus on adding to its system?",["A mechanical keyboard","A bar code reader","A responsive touchscreen","A digital graphic tablet"],1],
+["You're asked to scan your hard drive and delete unneeded temporary files to speed up the system. What type of software are you using for this job?",["Device driver software","Multimedia applications","Utility software programs","Operating system kernels"],2],
+["A video editor notices small delays because the CPU keeps waiting for instructions it uses often. Which type of memory fixes this by keeping those instructions very close to the CPU?",["The solid state drive","The primary RAM","The read-only memory","The cache memory"],3],
+["A company buys computers and an operating system so employees can write reports and build financial spreadsheets. What category of software do they still need for these tasks?",["Productivity application software","System diagnostic software","Background utility software","Multimedia editing software"],0],
+["After a sudden blackout, a student's unsaved essay is gone, yet the computer still starts up normally once the power is back. This situation shows the basic difference between which two things?",["Solid State Drives and Hard Disk Drives","Volatile RAM and Non-volatile ROM","System Software and Application Software","Cache Memory and Primary Memory"],1],
+["An architect has to show a detailed 3D building model to a large audience in a big conference room. Which output device would work best for enlarging the visuals?",["A high-lumen projector","A large LCD monitor","A virtual reality headset","A high-resolution printer"],0],
+["A user edits a photo in Adobe Photoshop and then uses Google Chrome to upload it online. How are these two programs classified in the software world?",["Photoshop is an application; Chrome is a utility.","Both are considered system utility software.","Both are considered application software.","Photoshop is a utility; Chrome is an application."],2],
+["What key trait sets secondary storage like an SSD or HDD apart from primary memory like RAM in the way they handle data?",["Secondary storage communicates directly with the CPU.","Secondary storage retains data permanently without power.","Secondary storage processes active calculations.","Secondary storage is significantly faster than primary memory."],1],
+["When a user clicks a folder icon to open it, the system turns that click into a hardware action that reads the storage drive. Which software is mainly in charge of this interaction between hardware and software?",["The file manager utility","The storage device driver","The productivity software","The operating system"],3],
+["A phone maker wants a screen that shows true blacks and strong contrast by controlling each pixel individually. According to the lesson, which display technology is this?",["Active Matrix Organic Light-Emitting Diode (AMOLED)","Cathode Ray Tube (CRT)","Liquid Crystal Display (LCD)","Standard Light-Emitting Diode (LED)"],0],
+["A weather center uses a supercomputer to forecast storm paths. When it handles trillions of atmospheric data points in real time, which characteristic of the computer matters most?",["Its output resolution","Its network connectivity","Its processing speed","Its multimedia capability"],2],
+["In a live video call, a participant has to send both their voice and their facial expressions in real time. Which pair of input devices is required?",["A monitor and a speaker system","A webcam and a microphone device","A keyboard and a graphic tablet","A scanner and a bar code reader"],1],
+["Which statement best describes how System Software and Application Software work together on a modern personal computer?",["System software relies on application software to boot the computer hardware.","Both operate independently and communicate directly with the computer's CPU.","Both are interchangeable depending on the specific tasks the user wants to perform.","Application software relies on system software to access the hardware resources."],3],
+["When computers on a network exchange an email, they follow specific data transmission protocols. According to the lesson, what are the three core parts of this communication process?",["The sender, the receiver, and the message","The server, the client, and the network","The input, the processor, and the output","The hardware, the software, and the user"],0],
+["A system administrator sees that a computer's volatile memory is almost full. Which situation is most likely happening on this machine?",["The ROM is struggling to retain the permanent BIOS startup instructions.","The hard drive is completely full of saved documents and media files.","The RAM is filled with actively running applications and temporary data.","The cache memory is failing to store the operating system's core files."],2],
+["Windows 11 manages the computer's overall hardware, but an antivirus program is classified as utility software instead of an operating system. What is the main reason?",["It provides a platform for other applications to run.","It focuses on performing specific system maintenance and security.","It translates specific hardware commands for the CPU.","It is designed solely for user entertainment and media."],1]
+];
+
+const $ = s => document.querySelector(s);
+const app = $("#app");
+const esc = s => String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+function rnd(n){ try{const a=new Uint32Array(1);crypto.getRandomValues(a);return a[0]%n;}catch(e){return Math.floor(Math.random()*n);} }
+function shuffle(arr){ const a=arr.slice(); for(let i=a.length-1;i>0;i--){const j=rnd(i+1);[a[i],a[j]]=[a[j],a[i]];} return a; }
+
+let S = { phase:"start", name:"", items:[], idx:0, sel:null, deadline:0, confirm:false, filter:"all", finishedAt:0 };
+let tick = null;
+
+function newAttempt(){
+  const items = shuffle(BANK.map((q,i)=>i)).map(bi=>{
+    const [stem, opts, ans] = BANK[bi];
+    const order = shuffle([0,1,2,3]);
+    return { bank:bi, stem, opts: order.map(o=>opts[o]), correct: order.indexOf(ans), picked:null, timedOut:false };
+  });
+  S.items = items; S.idx = 0; S.sel = null; S.confirm = false; S.filter = "all";
+  S.phase = "quiz"; S.deadline = Date.now() + SECONDS*1000;
+  render(); startTick();
+}
+
+function startTick(){ stopTick(); tick = setInterval(onTick, 200); onTick(); }
+function stopTick(){ if(tick){clearInterval(tick);tick=null;} }
+function remaining(){ return Math.max(0, S.deadline - Date.now()); }
+
+function onTick(){
+  if(S.phase!=="quiz") return stopTick();
+  const ms = remaining();
+  const sec = Math.ceil(ms/1000);
+  const t = $("#timer"); if(!t) return;
+  t.querySelector(".num").textContent = sec;
+  const C = 2*Math.PI*27;
+  t.querySelector(".arc").style.strokeDashoffset = String(C*(1 - ms/(SECONDS*1000)));
+  t.classList.toggle("warn", sec<=20 && sec>10);
+  t.classList.toggle("crit", sec<=10);
+  t.setAttribute("aria-label", sec+" seconds left");
+  if(ms<=0) advance(true);
+}
+
+function advance(timeUp){
+  const it = S.items[S.idx];
+  it.picked = S.sel;
+  it.timedOut = !!timeUp;
+  if(timeUp) toast(S.sel===null ? "Time's up. Moving to the next question." : "Time's up. Your selected answer was saved.");
+  S.sel = null; S.confirm = false;
+  if(S.idx >= S.items.length-1){
+    S.phase = "done"; S.finishedAt = Date.now(); stopTick(); render(); return;
+  }
+  S.idx++; S.deadline = Date.now() + SECONDS*1000;
+  render(); onTick();
+}
+
+let toastT=null;
+function toast(msg){ const t=$("#toast"); t.textContent=msg; t.hidden=false; clearTimeout(toastT); toastT=setTimeout(()=>{t.hidden=true;},2200); }
+
+function counts(){
+  let g=0,b=0,u=0;
+  S.items.forEach(it=>{ if(it.picked===null) u++; else if(it.picked===it.correct) g++; else b++; });
+  return {g,b,u};
+}
+
+function strip(showResult){
+  const cells = S.items.map((it,i)=>{
+    let c = "";
+    if(showResult){ c = it.picked===null ? "" : (it.picked===it.correct ? "g" : "b"); }
+    else { c = it.picked===null ? "" : "p"; }
+    return `<i class="hole ${c}" title="Q${i+1}"></i>`;
+  }).join("");
+  return `<div class="card-strip" aria-hidden="true"><div class="holes">${cells}</div>
+    <div class="strip-meta"><span>COL 01–50 · LIVING IN THE IT ERA REVIEW</span><span>${showResult?'<span style="color:var(--good)">■</span> correct <span style="color:var(--bad)">■</span> wrong ▢ blank':"■ answered ▢ blank"}</span></div></div>`;
+}
+
+function render(){
+  if(S.phase==="start") renderStart();
+  else if(S.phase==="quiz") renderQuiz();
+  else if(S.phase==="done") renderDone();
+  else renderResult();
+}
+
+function renderStart(){
+  app.innerHTML = `
+  <header class="hero">
+    <h1>Living in the IT Era Review</h1>
+  </header>
+  <section class="panel" style="display:flex;flex-direction:column;gap:20px">
+    <ul class="rules">
+      <li><b>Your own set</b><span>Questions and choices are reshuffled every attempt, so no two sets are the same.</span></li>
+      <li><b>70 seconds each</b><span>When the timer runs out, the quiz moves on by itself. A selected answer still counts.</span></li>
+      <li><b>No going back</b><span>Once you move on, that question is locked. To redo one, restart the whole quiz.</span></li>
+      <li><b>Answers at the end</b><span>You'll see what's right only after the last question, when you open your result.</span></li>
+    </ul>
+    <div class="field">
+      <label for="nm">Your name <span style="font-weight:400;color:var(--muted)">(shown on your result)</span></label>
+      <input id="nm" type="text" autocomplete="name" placeholder="e.g. Dela Cruz, Juan" value="${esc(S.name)}">
+    </div>
+    <div class="row"><button class="btn" id="go">Start quiz</button><span class="hint">Tip: press 1–4 or A–D to pick, Enter to go next.</span></div>
+  </section>
+  ${strip(false)}`;
+  $("#go").onclick = ()=>{ S.name = $("#nm").value.trim(); newAttempt(); };
+  $("#nm").addEventListener("keydown",e=>{ if(e.key==="Enter"){ S.name=e.target.value.trim(); newAttempt(); } });
+}
+
+function renderQuiz(){
+  const it = S.items[S.idx], n = S.idx+1, total = S.items.length, last = n===total;
+  const C = (2*Math.PI*27).toFixed(2);
+  app.innerHTML = `
+  <div class="bar">
+    <div style="display:flex;flex-direction:column;gap:2px">
+      <span class="eyebrow">Living in the IT Era Review</span>
+      <span class="qcount">Question <strong>${String(n).padStart(2,"0")}</strong> / ${total}</span>
+    </div>
+    <div class="timer" id="timer" role="timer" aria-label="${SECONDS} seconds left">
+      <svg viewBox="0 0 64 64"><circle class="track" cx="32" cy="32" r="27"/><circle class="arc" cx="32" cy="32" r="27" stroke-dasharray="${C}" stroke-dashoffset="0"/></svg>
+      <span class="num">${SECONDS}</span>
+    </div>
+  </div>
+  <div class="progress" aria-hidden="true"><i style="width:${(S.idx/total*100).toFixed(1)}%"></i></div>
+  <section class="panel fade" style="display:flex;flex-direction:column;gap:18px">
+    <p class="stem" id="stem">${esc(it.stem)}</p>
+    <div class="opts" role="radiogroup" aria-labelledby="stem">
+      ${it.opts.map((o,i)=>`<button class="opt" role="radio" aria-checked="${S.sel===i}" data-i="${i}"><span class="let">${L[i]}</span><span class="txt">${esc(o)}</span></button>`).join("")}
+    </div>
+    <div class="foot">
+      <button class="linkbtn" id="rs">Restart quiz</button>
+      <button class="btn" id="nx">${S.sel===null ? (last?"Finish without answering":"Skip") : (last?"Finish":"Next question")}</button>
+    </div>
+    <div id="cf"></div>
+  </section>`;
+  app.querySelectorAll(".opt").forEach(b=>b.onclick=()=>pick(+b.dataset.i));
+  $("#nx").onclick = ()=>advance(false);
+  $("#rs").onclick = ()=>{ S.confirm = true; drawConfirm(); };
+  drawConfirm();
+}
+
+function drawConfirm(){
+  const box = $("#cf"); if(!box) return;
+  if(!S.confirm){ box.innerHTML=""; return; }
+  box.innerHTML = `<div class="confirm"><p><b>Restart the quiz?</b> Your answers so far will be cleared and you'll get a new shuffled set. The timer keeps running until you choose.</p>
+    <div class="row"><button class="btn danger" id="cy">Restart now</button><button class="btn ghost" id="cn">Keep going</button></div></div>`;
+  $("#cy").onclick = ()=>newAttempt();
+  $("#cn").onclick = ()=>{ S.confirm=false; drawConfirm(); };
+  $("#cn").focus();
+}
+
+function pick(i){
+  S.sel = i;
+  app.querySelectorAll(".opt").forEach(b=>b.setAttribute("aria-checked", String(+b.dataset.i===i)));
+  const last = S.idx===S.items.length-1;
+  $("#nx").textContent = last ? "Finish" : "Next question";
+}
+
+function renderDone(){
+  const answered = S.items.filter(i=>i.picked!==null).length;
+  const timeouts = S.items.filter(i=>i.timedOut && i.picked===null).length;
+  app.innerHTML = `
+  <header class="hero">
+    <p class="eyebrow">Living in the IT Era Review</p>
+    <h1>All 50 done.</h1>
+    <p class="sub">Your answers are locked in. Open your result to see your score and the correct answers.</p>
+  </header>
+  <section class="panel" style="display:flex;flex-direction:column;gap:18px">
+    <div class="stats">
+      <div class="stat"><div class="k">Answered</div><div class="v">${answered}</div></div>
+      <div class="stat"><div class="k">Left blank</div><div class="v">${S.items.length-answered}</div></div>
+      <div class="stat"><div class="k">Timed out</div><div class="v">${timeouts}</div></div>
+    </div>
+    <div class="row"><button class="btn" id="vr">View Quiz Result</button><button class="btn ghost" id="ag">Retake with a new set</button></div>
+  </section>
+  ${strip(false)}`;
+  $("#vr").onclick = ()=>{ S.phase="result"; render(); window.scrollTo(0,0); };
+  $("#ag").onclick = newAttempt;
+}
+
+function remark(p){
+  if(p>=90) return "Excellent. You're ready for this one.";
+  if(p>=75) return "Good work. Review the ones you missed below.";
+  if(p>=60) return "Almost there. Go over the wrong answers and try a new set.";
+  return "Keep reviewing. Read through the answers below, then take a new set.";
+}
+
+function renderResult(){
+  const {g,b,u} = counts(), total = S.items.length, p = Math.round(g/total*100);
+  const when = new Date(S.finishedAt||Date.now()).toLocaleString([], {dateStyle:"medium", timeStyle:"short"});
+  app.innerHTML = `
+  <header style="display:flex;flex-direction:column;gap:6px">
+    <p class="eyebrow">Quiz result · Living in the IT Era Review</p>
+    <h2 style="font-size:24px">${S.name ? esc(S.name) : "Student"}</h2>
+    <p class="hint">Finished ${esc(when)}</p>
+  </header>
+  <section class="panel" style="display:flex;flex-direction:column;gap:18px">
+    <div class="score"><span class="big">${g}</span><span class="of">/ ${total}</span><span class="pct">${p}%</span></div>
+    <p>${remark(p)}</p>
+    <div class="stats">
+      <div class="stat g"><div class="k">Correct</div><div class="v">${g}</div></div>
+      <div class="stat b"><div class="k">Wrong</div><div class="v">${b}</div></div>
+      <div class="stat"><div class="k">Blank</div><div class="v">${u}</div></div>
+    </div>
+    ${strip(true)}
+    <div class="row"><button class="btn" id="ag">Retake with a new set</button></div>
+  </section>
+  <section style="display:flex;flex-direction:column;gap:12px">
+    <div class="rhead"><h3 style="font-size:20px">Answer review</h3>
+      <div class="tabs" role="group" aria-label="Filter questions">
+        ${[["all","All "+total],["wrong","Wrong "+b],["blank","Blank "+u],["right","Correct "+g]].map(([k,t])=>`<button class="tab" data-f="${k}" aria-pressed="${S.filter===k}">${t}</button>`).join("")}
+      </div>
+    </div>
+    <div class="review" id="rv"></div>
+  </section>`;
+  $("#ag").onclick = newAttempt;
+  app.querySelectorAll(".tab").forEach(t=>t.onclick=()=>{ S.filter=t.dataset.f; app.querySelectorAll(".tab").forEach(x=>x.setAttribute("aria-pressed",String(x===t))); drawReview(); });
+  drawReview();
+}
+
+function drawReview(){
+  const rows = S.items.map((it,i)=>({it,i})).filter(({it})=>{
+    const st = it.picked===null ? "blank" : (it.picked===it.correct ? "right" : "wrong");
+    return S.filter==="all" || S.filter===st;
+  });
+  $("#rv").innerHTML = rows.length ? rows.map(({it,i})=>{
+    const st = it.picked===null ? "u" : (it.picked===it.correct ? "g" : "b");
+    const pill = st==="g" ? "Correct" : st==="b" ? "Wrong" : (it.timedOut ? "Timed out" : "Skipped");
+    return `<article class="ritem ${st}">
+      <div class="rhead"><span class="rnum">Question ${i+1}</span><span class="pill ${st}">${pill}</span></div>
+      <p class="rstem">${esc(it.stem)}</p>
+      <ul class="ropts">${it.opts.map((o,k)=>{
+        const isC = k===it.correct, isP = k===it.picked;
+        const cls = isC ? "correct" : (isP ? "wrong" : "");
+        const tag = isC && isP ? "Your answer · Correct" : isC ? "Correct answer" : isP ? "Your answer" : "";
+        return `<li class="${cls}"><span class="let">${L[k]}.</span><span>${esc(o)}</span>${tag?`<span class="tag">${tag}</span>`:""}</li>`;
+      }).join("")}</ul>
+    </article>`;
+  }).join("") : `<p class="empty">Nothing here. Nice.</p>`;
+}
+
+document.addEventListener("keydown", e=>{
+  if(S.phase!=="quiz" || S.confirm) return;
+  if(e.target && e.target.tagName==="INPUT") return;
+  const k = e.key.toUpperCase();
+  const map = {"1":0,"2":1,"3":2,"4":3,"A":0,"B":1,"C":2,"D":3};
+  if(k in map){ e.preventDefault(); pick(map[k]); }
+  else if(e.key==="Enter" && S.sel!==null && !(e.target && e.target.classList && e.target.classList.contains("linkbtn"))){ e.preventDefault(); advance(false); }
+});
+
+function start(data){
+  if(data && data.S && data.S.phase){ S = data.S; }
+  render();
+  if(S.phase==="quiz") startTick();
+}
+window.claude?.hot?.snapshot?.(()=>({S}));
+window.claude?.hot?.ready ? window.claude.hot.ready(start) : start(window.claude?.hot?.data ?? {});
+</script>
+
+</body>
+</html>
